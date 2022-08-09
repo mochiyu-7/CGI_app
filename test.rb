@@ -1,7 +1,7 @@
 require 'webrick'
 
 server = WEBrick::HTTPServer.new({
-  :DocumentRoot => '.',
+  :DocumentRoot => '/',
   :CGIInterpreter => WEBrick::HTTPServlet::CGIHandler::Ruby,
   :Port => '3000',
 })
@@ -9,7 +9,7 @@ server = WEBrick::HTTPServer.new({
   Signal.trap(signal){ server.shutdown }
 }
 
-server.mount('/test', WEBrick::HTTPServlet::ERBHandler, 'test.html.erb')
+server.mount('/', WEBrick::HTTPServlet::ERBHandler, 'test.html.erb')
 
 # この一行を追記
 server.mount('/indicate.cgi', WEBrick::HTTPServlet::CGIHandler, 'indicate.rb')
